@@ -1,24 +1,14 @@
 import React from 'react';
-import logo from './logo.svg';
+import {ZonaEAllData} from './components/ZonaE/Zona_E_by_name';
+import Header from './Pages/Header';
+import Rutas from './routes/MyRoutes';
 import './App.css';
+
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Rutas/>
     </div>
   );
 }
