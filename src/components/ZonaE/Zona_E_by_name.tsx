@@ -50,7 +50,7 @@ export const ZonaEAllData = ()=>{
     //by id
     const fetchZonaEById = async()=>{
           
-        fetch(`http://www.nocors.somee.com/api/Zona_E/${id}`, {
+        fetch(`https://www.nocors.somee.com/api/Zona_E/${id}`, {
         method: "GET",
         })
         .then(response => response.json()) 
@@ -78,7 +78,7 @@ export const ZonaEAllData = ()=>{
     const fetchZonaE  = async ()=>{
         
         try{
-            const response = await fetch(`http://www.nocors.somee.com/api/Zona_E/Nombre/${nombre}`);
+            const response = await fetch(`https://www.nocors.somee.com/api/Zona_E/Nombre/${nombre}`);
             const data = await response.json();
             setGetByName(data);
             setNombre('');
@@ -100,7 +100,7 @@ export const ZonaEAllData = ()=>{
     //by cedula
     const getZonaEByCedula = async()=>{
         cedula == '' ? console.log("Cedula file is empty") : (
-        fetch(`http://www.nocors.somee.com/api/Zona_E/Cedula/${cedula}`)
+        fetch(`https://www.nocors.somee.com/api/Zona_E/Cedula/${cedula}`)
         .then(res=> res.json())
         .then(data=> setGetByCedula(data))
         .catch(error => console.log('error', error))
@@ -119,7 +119,7 @@ export const ZonaEAllData = ()=>{
     //by telefono
     const getZonaEByTelefono = async()=>{
         telefono == '' ? console.log("Cedula file is empty") : (
-        fetch(`http://www.nocors.somee.com/api/Zona_E/Telefono/${telefono}`)
+        fetch(`https://www.nocors.somee.com/api/Zona_E/Telefono/${telefono}`)
         .then(res=> res.json())
         .then(data=> setGetByTelefono(data))
         .catch(error => console.log('error', error))
@@ -138,7 +138,7 @@ export const ZonaEAllData = ()=>{
     //by Colegio Electoral
     const getZonaEByColegioElectoral = async()=>{
         colegioElectoral == '' ? console.log("Cedula file is empty") : (
-        fetch(`http://www.nocors.somee.com/api/Zona_E/Colegio_Electoral/${colegioElectoral}`)
+        fetch(`https://www.nocors.somee.com/api/Zona_E/Colegio_Electoral/${colegioElectoral}`)
         .then(res=> res.json())
         .then(data=> setGetByColegioElectoral(data))
         .catch(error => console.log('error', error))
@@ -159,7 +159,7 @@ export const ZonaEAllData = ()=>{
     //by Coordinador
     const getZonaEByCoordinador = async()=>{
         coordinador == '' ? console.log("Cedula file is empty") : (
-        fetch(`http://www.nocors.somee.com/api/Zona_E/Cordinador/${coordinador}`)
+        fetch(`https://www.nocors.somee.com/api/Zona_E/Cordinador/${coordinador}`)
         .then(res=> res.json())
         .then(data=> setGetByCoordinador(data))
         .catch(error => console.log('error', error))
