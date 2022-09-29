@@ -33,7 +33,7 @@ export const ZonaEAllData = ()=>{
 
     const fetchZonaEById = async()=>{
           
-        fetch(`http://www.bradigapi.somee.com/api/Zona_E/${id}`, {
+        fetch(`https://www.bradigapi.somee.com/api/Zona_E/${id}`, {
         method: "GET",
         })
         .then(response => response.json()) 
@@ -58,7 +58,7 @@ export const ZonaEAllData = ()=>{
     const fetchZonaE  = async ()=>{
         
         try{
-            const response = await fetch(`http://www.bradigapi.somee.com/api/Zona_E/Nombre/${nombre}`);
+            const response = await fetch(`https://www.bradigapi.somee.com/api/Zona_E/Nombre/${nombre}`);
             const data = await response.json();
             setGetByName(data);
             setNombre('');
