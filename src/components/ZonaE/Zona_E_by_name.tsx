@@ -50,7 +50,7 @@ export const ZonaEAllData = ()=>{
     //by id
     const fetchZonaEById = async()=>{
           
-        fetch(`https://www.bradigapi.somee.com/api/Zona_E/${id}`, {
+        fetch(`http://www.nocors.somee.com/api/Zona_E/${id}`, {
         method: "GET",
         })
         .then(response => response.json()) 
@@ -78,7 +78,7 @@ export const ZonaEAllData = ()=>{
     const fetchZonaE  = async ()=>{
         
         try{
-            const response = await fetch(`https://www.bradigapi.somee.com/api/Zona_E/Nombre/${nombre}`);
+            const response = await fetch(`http://www.nocors.somee.com/api/Zona_E/Nombre/${nombre}`);
             const data = await response.json();
             setGetByName(data);
             setNombre('');
@@ -100,7 +100,7 @@ export const ZonaEAllData = ()=>{
     //by cedula
     const getZonaEByCedula = async()=>{
         cedula == '' ? console.log("Cedula file is empty") : (
-        fetch(`https://www.bradigapi.somee.com/api/Zona_E/Cedula/${cedula}`)
+        fetch(`http://www.nocors.somee.com/api/Zona_E/Cedula/${cedula}`)
         .then(res=> res.json())
         .then(data=> setGetByCedula(data))
         .catch(error => console.log('error', error))
@@ -119,7 +119,7 @@ export const ZonaEAllData = ()=>{
     //by telefono
     const getZonaEByTelefono = async()=>{
         telefono == '' ? console.log("Cedula file is empty") : (
-        fetch(`https://www.bradigapi.somee.com/api/Zona_E/Telefono/${telefono}`)
+        fetch(`http://www.nocors.somee.com/api/Zona_E/Telefono/${telefono}`)
         .then(res=> res.json())
         .then(data=> setGetByTelefono(data))
         .catch(error => console.log('error', error))
@@ -138,7 +138,7 @@ export const ZonaEAllData = ()=>{
     //by Colegio Electoral
     const getZonaEByColegioElectoral = async()=>{
         colegioElectoral == '' ? console.log("Cedula file is empty") : (
-        fetch(`https://www.bradigapi.somee.com/api/Zona_E/Colegio_Electoral/${colegioElectoral}`)
+        fetch(`http://www.nocors.somee.com/api/Zona_E/Colegio_Electoral/${colegioElectoral}`)
         .then(res=> res.json())
         .then(data=> setGetByColegioElectoral(data))
         .catch(error => console.log('error', error))
@@ -159,7 +159,7 @@ export const ZonaEAllData = ()=>{
     //by Coordinador
     const getZonaEByCoordinador = async()=>{
         coordinador == '' ? console.log("Cedula file is empty") : (
-        fetch(`https://www.bradigapi.somee.com/api/Zona_E/Cordinador/${coordinador}`)
+        fetch(`http://www.nocors.somee.com/api/Zona_E/Cordinador/${coordinador}`)
         .then(res=> res.json())
         .then(data=> setGetByCoordinador(data))
         .catch(error => console.log('error', error))
@@ -174,6 +174,57 @@ export const ZonaEAllData = ()=>{
         setHideByCoordinador('');
     }
   
+
+    //clear
+    const clearId = ()=>{
+      setNombre('');
+      setCedula('');
+      setTelefono('');
+      setColegioElectoral('');
+      setCoordinador('');
+    }
+
+    const clearNombre = ()=>{
+        setId('');
+        setCedula('');
+        setTelefono('');
+        setColegioElectoral('');
+        setCoordinador('');
+      }
+
+      const clearCedula = ()=>{
+        setId('');
+        setNombre('');
+        setTelefono('');
+        setColegioElectoral('');
+        setCoordinador('');
+      }
+
+      const clearTelefono = ()=>{
+        setId('');
+        setNombre('');
+        setCedula('');
+        setColegioElectoral('');
+        setCoordinador('');
+      }
+
+      const clearColegio = ()=>{
+        setId('');
+        setNombre('');
+        setCedula('');
+        setTelefono('');
+        setCoordinador('');
+      }
+
+      const clearCoordinador = ()=>{
+        setId('');
+        setNombre('');
+        setCedula('');
+        setTelefono('');
+        setColegioElectoral('');
+      }
+
+    
     return(
         <div className='zona-e-all-data pb-4'>
             <div className='mt-4 ps-3'>
@@ -190,6 +241,7 @@ export const ZonaEAllData = ()=>{
                             placeholder='Id...'
                             value={id}
                             onChange={(e)=> setId(e.target.value)}
+                            onClick={clearId}
                         />
                     </div>
                 </div>
@@ -203,6 +255,7 @@ export const ZonaEAllData = ()=>{
                             placeholder='Nombre'
                             value={nombre}
                             onChange={(e)=>setNombre(e.target.value)}
+                            onClick={clearNombre}
                         />
                     </div>
                 </div>
@@ -216,6 +269,7 @@ export const ZonaEAllData = ()=>{
                             placeholder='cedula'
                             value={cedula}
                             onChange={(e)=>setCedula(e.target.value)}
+                            onClick={clearCedula}
                         />
                     </div>
                 </div>
@@ -229,6 +283,7 @@ export const ZonaEAllData = ()=>{
                             placeholder='telefono'
                             value={telefono}
                             onChange={(e)=> setTelefono(e.target.value)}
+                            onClick={clearTelefono}
                         />
                     </div>
                 </div>
@@ -242,6 +297,7 @@ export const ZonaEAllData = ()=>{
                             placeholder='Colegio Electoral'
                             value={colegioElectoral}
                             onChange={(e)=> setColegioElectoral(e.target.value)}
+                            onClick={clearColegio}
                         />
                     </div>
                 </div>
@@ -255,6 +311,7 @@ export const ZonaEAllData = ()=>{
                                 placeholder='Coordinador'
                                 value={coordinador}
                                 onChange={(e)=> setCoordinador(e.target.value)}
+                                onClick={clearCoordinador}
                         />
                     </div>
                 </div>
