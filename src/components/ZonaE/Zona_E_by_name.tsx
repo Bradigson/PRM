@@ -2,6 +2,12 @@ import React from 'react';
 import '../../assets/style/Zona_E.scss';
 import { useState, useEffect } from 'react';
 import internal from 'stream';
+import { zonaEServiceById, zonaEServiceByName, zonaEServiceByCedula, zonaEServiceByTelefono,
+    zonaEServiceByColegioElectoral, zonaEServiceByCoordinador } from '../../services/ServicesZonaE';
+
+
+
+import {ZonaEPopup} from '../PopUp/ZonaECreate';
 
 interface Persona{
     id : number, 
@@ -9,7 +15,8 @@ interface Persona{
     cedula : string,
     telefono : string,
     colegio_Electoral : string,
-    cordinador : string
+    cordinador : string,
+    loading : boolean
 }
 
 
@@ -22,7 +29,8 @@ export const ZonaEAllData = ()=>{
          cedula:"",
          telefono:"",
          colegio_Electoral:"",
-         coordinador:""
+         coordinador:"", 
+         loading : true
      });
      const [getByCedula, setGetByCedula] = useState<Persona[]>([]);
      const [getByTelefono, setGetByTelefono] = useState<Persona[]>([]);
@@ -51,19 +59,8 @@ export const ZonaEAllData = ()=>{
      //by id
      const fetchZonaEById = async()=>{
            
-         fetch(`https://www.api-prm.somee.com/api/Zona_E/${id}`, {
-         method: "GET",
-         })
-         .then(response => response.json()) 
-         .then(data=> setGetById({...getById, id:data.id, 
-             nombre : data.nombre,
-             cedula : data.cedula,
-             telefono : data.telefono,
-             colegio_Electoral : data.colegio_Electoral,
-             coordinador : data.cordinador
-         }))
-         .catch(err => console.log(err));
-         
+        zonaEServiceById(setGetById, id);
+
           setId('');
           setHideById('');
           setHideByName('d-none');  
@@ -77,36 +74,26 @@ export const ZonaEAllData = ()=>{
  
      //by nombre
      const fetchZonaE  = async ()=>{
-         
-         try{
-             const response = await fetch(`https://www.api-prm.somee.com/api/Zona_E/Nombre/${nombre}`);
-             const data = await response.json();
-             setGetByName(data);
-             setNombre('');
-             setId('');
- 
-             setHideById('d-none');
-             setHideByName('');  
-             setHideByCedula('d-none');
-             setHideByTelefono('d-none');
-             setHideByColegioElectoral('d-none');
-             setHideByCoordinador('d-none');
-             setHideButton('');
- 
-         }catch(err){
-             console.log(err);
-         }
+
+        zonaEServiceByName(setGetByName, nombre);
+
+        setNombre('');
+        setId('');
+        setHideById('d-none');
+        setHideByName('');  
+        setHideByCedula('d-none');
+        setHideByTelefono('d-none');
+        setHideByColegioElectoral('d-none');
+        setHideByCoordinador('d-none');
+        setHideButton('');
+       
      }
  
      
      //by cedula
      const getZonaEByCedula = async()=>{
-         cedula == '' ? console.log("Cedula file is empty") : (
-         fetch(`https://www.api-prm.somee.com/api/Zona_E/Cedula/${cedula}`)
-         .then(res=> res.json())
-         .then(data=> setGetByCedula(data))
-         .catch(error => console.log('error', error))
-         );
+
+        zonaEServiceByCedula(setGetByCedula,cedula );
          
          setCedula('');
          setHideById('d-none');
@@ -121,13 +108,9 @@ export const ZonaEAllData = ()=>{
  
      //by telefono
      const getZonaEByTelefono = async()=>{
-         telefono == '' ? console.log("Cedula file is empty") : (
-         fetch(`https://www.api-prm.somee.com/api/Zona_E/Telefono/${telefono}`)
-         .then(res=> res.json())
-         .then(data=> setGetByTelefono(data))
-         .catch(error => console.log('error', error))
-         );
- 
+
+        zonaEServiceByTelefono(setGetByTelefono, telefono);
+         
          setTelefono('');
          setHideById('d-none');
          setHideByName('d-none');  
@@ -141,13 +124,9 @@ export const ZonaEAllData = ()=>{
  
      //by Colegio Electoral
      const getZonaEByColegioElectoral = async()=>{
-         colegioElectoral == '' ? console.log("Cedula file is empty") : (
-         fetch(`https://www.api-prm.somee.com/api/Zona_E/Colegio_Electoral/${colegioElectoral}`)
-         .then(res=> res.json())
-         .then(data=> setGetByColegioElectoral(data))
-         .catch(error => console.log('error', error))
-         );
- 
+
+        zonaEServiceByColegioElectoral(setGetByColegioElectoral, colegioElectoral);
+         
          setColegioElectoral('');
          setHideById('d-none');
          setHideByName('d-none');  
@@ -163,13 +142,8 @@ export const ZonaEAllData = ()=>{
  
      //by Coordinador
      const getZonaEByCoordinador = async()=>{
-         coordinador == '' ? console.log("Cedula file is empty") : (
-         fetch(`https://www.api-prm.somee.com/api/Zona_E/Cordinador/${coordinador}`)
-         .then(res=> res.json())
-         .then(data=> setGetByCoordinador(data))
-         .catch(error => console.log('error', error))
-         );
-         
+
+         zonaEServiceByCoordinador(setGetByCoordinador, coordinador);
          setCoordinador('');
          setHideById('d-none');
          setHideByName('d-none');  
@@ -236,6 +210,7 @@ export const ZonaEAllData = ()=>{
              <div className='mt-4 ps-3'>
                  <h2>Zona E</h2>
              </div>
+
              <div className='search-container p-5 shadow'>
                  <div>
                      <div><strong>Id</strong></div>
@@ -322,7 +297,6 @@ export const ZonaEAllData = ()=>{
                      </div>
                  </div>
                  
-                 
              </div>
              <div className='text-center  p-2 button-search'>
                      <div>
@@ -345,6 +319,8 @@ export const ZonaEAllData = ()=>{
                              coordinador == '' ? <div></div>:<button onClick={getZonaEByCoordinador} className="btn-search shadow">Search</button>
                          }
                      </div>
+                    <ZonaEPopup/>
+
              </div>
  
              <div className=''>
