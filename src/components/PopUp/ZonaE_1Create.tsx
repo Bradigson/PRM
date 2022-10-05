@@ -1,5 +1,5 @@
 import { useState } from "react";
-import {zonaEInsertPerson} from '../../services/ServicePopUp';
+import {zonaE1InsertPerson} from '../../services/ServicePopUp';
 
 
 
@@ -9,7 +9,7 @@ interface messageResponse{
     errorMessage : string
 }
 
-export const ZonaEPopup = ()=>{
+export const ZonaE1Popup = ()=>{
 
     const [nombre, setNombre]=useState<string>('');
     const [cedula, setCedula]=useState<string>('');
@@ -42,7 +42,6 @@ export const ZonaEPopup = ()=>{
 
     const handleSubmit = async (e : any)=>{
         e.preventDefault();
-
         if(nombre == ""){
             setIsEmptyName('Campo nombre vacio');
         }else if(cedula == "")
@@ -64,9 +63,11 @@ export const ZonaEPopup = ()=>{
         {
             setIsEmptyCoordinador('Campo coordinador vacio');
             setIsEmptyColegioElectoral('');
-        }else{
+        }
+        else{
             setLoading(true);
-            await zonaEInsertPerson(nombre, cedula, telefono, colegioElectoral, coordinador, setData, setLoading);
+            await zonaE1InsertPerson(nombre, cedula, telefono, colegioElectoral, coordinador, setData, setLoading);
+
         }
         
 
@@ -94,7 +95,7 @@ export const ZonaEPopup = ()=>{
                     <div className="modal-dialog modal-dialog-centered">
                             <div className="modal-content">
                                     <div className="modal-header">
-                                        <h1 className="modal-title fs-5" id="exampleModalToggleLabel">Zona E</h1>
+                                        <h1 className="modal-title fs-5" id="exampleModalToggleLabel">Zona E-1</h1>
                                         <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"
                                         onClick={handleClose}></button>
                                     </div>
@@ -124,7 +125,7 @@ export const ZonaEPopup = ()=>{
                                             </div>
 
                                             <div className="col-12">
-                                                <button type="submit" className="btn btn-success">{loading ? "Cargando" : "Crear"}</button>
+                                                <button type="submit" className="btn btn-success">{loading ? ("cargando"):("Create")}</button>
 
                                                 
                                             </div>

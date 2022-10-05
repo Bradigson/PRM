@@ -2,6 +2,10 @@ import React from 'react';
 import '../../assets/style/Zona_E.scss';
 import { useState, useEffect } from 'react';
 import internal from 'stream';
+import {zonaE1ServiceById, zonaE1ServiceByName, zonaE1ServiceByCedula, zonaE1ServiceByTelefono,
+        zonaE1ServiceByColegioElectoral, zonaE1ServiceByCoordinador} from '../../services/ServicesZonaE_1';
+import {ZonaE1Popup} from '../PopUp/ZonaE_1Create';
+
 
 interface Persona{
     id : number, 
@@ -9,7 +13,7 @@ interface Persona{
     cedula : string,
     telefono : string,
     colegio_Electoral : string,
-    cordinador : string
+    cordinador : string,
 }
 
 
@@ -22,12 +26,13 @@ export const ZonaEOne = ()=>{
         cedula:"",
         telefono:"",
         colegio_Electoral:"",
-        coordinador:""
+        coordinador:"", 
     });
     const [getByCedula, setGetByCedula] = useState<Persona[]>([]);
     const [getByTelefono, setGetByTelefono] = useState<Persona[]>([]);
     const [getByColegioElectoral, setGetByColegioElectoral] = useState<Persona[]>([]);
     const [getByCoordinador, setGetByCoordinador] = useState<Persona[]>([]);
+    const [loading, setLoading] = useState<boolean>(false);
 
     //input value
     const [id, setId] = useState('');
@@ -50,64 +55,50 @@ export const ZonaEOne = ()=>{
 
     //by id
     const fetchZonaEById = async()=>{
-          
-        fetch(`https://www.api-prm.somee.com/api/Zona_E_1/${id}`, {
-        method: "GET",
-        })
-        .then(response => response.json()) 
-        .then(data=> setGetById({...getById, id:data.id, 
-            nombre : data.nombre,
-            cedula : data.cedula,
-            telefono : data.telefono,
-            colegio_Electoral : data.colegio_Electoral,
-            coordinador : data.cordinador
-        }))
-        .catch(err => console.log(err));
         
-         setId('');
-         setHideById('');
-         setHideByName('d-none');  
-         setHideByCedula('d-none');
-         setHideByTelefono('d-none');
-         setHideByColegioElectoral('d-none');
-         setHideByCoordinador('d-none');
-         setHideButton('');
+        setLoading(true);
+        zonaE1ServiceById(setGetById, id, setLoading);
+
+        setId('');
+        setHideById('');
+        setHideByName('d-none');  
+        setHideByCedula('d-none');
+        setHideByTelefono('d-none');
+        setHideByColegioElectoral('d-none');
+        setHideByCoordinador('d-none');
+        setHideButton('');
+       
+        
+        
     
     }
 
     //by nombre
     const fetchZonaE  = async ()=>{
+
+        setLoading(true);
+        zonaE1ServiceByName(setGetByName, nombre, setLoading);
+        setNombre('');
+        setId('');
+
+        setHideById('d-none');
+        setHideByName('');  
+        setHideByCedula('d-none');
+        setHideByTelefono('d-none');
+        setHideByColegioElectoral('d-none');
+        setHideByCoordinador('d-none');
+        setHideButton('');
         
-        try{
-            const response = await fetch(`https://www.api-prm.somee.com/api/Zona_E_1/Nombre/${nombre}`);
-            const data = await response.json();
-            setGetByName(data);
-            setNombre('');
-            setId('');
-
-            setHideById('d-none');
-            setHideByName('');  
-            setHideByCedula('d-none');
-            setHideByTelefono('d-none');
-            setHideByColegioElectoral('d-none');
-            setHideByCoordinador('d-none');
-            setHideButton('');
-
-        }catch(err){
-            console.log(err);
-        }
+       
     }
 
     
     //by cedula
     const getZonaEByCedula = async()=>{
-        cedula == '' ? console.log("Cedula file is empty") : (
-        fetch(`https://www.api-prm.somee.com/api/Zona_E_1/Cedula/${cedula}`)
-        .then(res=> res.json())
-        .then(data=> setGetByCedula(data))
-        .catch(error => console.log('error', error))
-        );
-        
+
+        setLoading(true);
+        zonaE1ServiceByCedula(setGetByCedula, cedula, setLoading );
+
         setCedula('');
         setHideById('d-none');
         setHideByName('d-none');  
@@ -121,12 +112,9 @@ export const ZonaEOne = ()=>{
 
     //by telefono
     const getZonaEByTelefono = async()=>{
-        telefono == '' ? console.log("Cedula file is empty") : (
-        fetch(`https://www.api-prm.somee.com/api/Zona_E_1/Telefono/${telefono}`)
-        .then(res=> res.json())
-        .then(data=> setGetByTelefono(data))
-        .catch(error => console.log('error', error))
-        );
+
+        setLoading(true);
+        zonaE1ServiceByTelefono(setGetByTelefono, telefono, setLoading);
 
         setTelefono('');
         setHideById('d-none');
@@ -141,12 +129,10 @@ export const ZonaEOne = ()=>{
 
     //by Colegio Electoral
     const getZonaEByColegioElectoral = async()=>{
-        colegioElectoral == '' ? console.log("Cedula file is empty") : (
-        fetch(`https://www.api-prm.somee.com/api/Zona_E_1/Colegio_Electoral/${colegioElectoral}`)
-        .then(res=> res.json())
-        .then(data=> setGetByColegioElectoral(data))
-        .catch(error => console.log('error', error))
-        );
+
+
+        setLoading(true);
+        zonaE1ServiceByColegioElectoral(setGetByColegioElectoral, colegioElectoral, setLoading)
 
         setColegioElectoral('');
         setHideById('d-none');
@@ -163,12 +149,9 @@ export const ZonaEOne = ()=>{
 
     //by Coordinador
     const getZonaEByCoordinador = async()=>{
-        coordinador == '' ? console.log("Cedula file is empty") : (
-        fetch(`https://www.api-prm.somee.com/api/Zona_E_1/Cordinador/${coordinador}`)
-        .then(res=> res.json())
-        .then(data=> setGetByCoordinador(data))
-        .catch(error => console.log('error', error))
-        );
+
+        setLoading(true);
+        zonaE1ServiceByCoordinador(setGetByCoordinador, coordinador, setLoading);
         
         setCoordinador('');
         setHideById('d-none');
@@ -345,6 +328,7 @@ export const ZonaEOne = ()=>{
                             coordinador == '' ? <div></div>:<button onClick={getZonaEByCoordinador} className="btn-search shadow">Search</button>
                         }
                     </div>
+                    <ZonaE1Popup/>
             </div>
 
             <div className=''>
@@ -367,7 +351,7 @@ export const ZonaEOne = ()=>{
 
                                  {/* by id */}
                             {
-                            getById != null ? (
+                             loading == false ? (
                                 <tr className={`${hideGetById} text-center`}>
                                     <td>{getById.id}</td>
                                     <td>{getById.nombre}</td>
@@ -378,87 +362,39 @@ export const ZonaEOne = ()=>{
                                     <th><button className={`${hideButton} btn btn-danger shadow`}><i className='bx bx-trash'></i></button></th>
                                     <th><button className={`${hideButton} btn btn-warning text-dark shadow`}><i className='bx bx-edit'></i></button></th>
                                 </tr>
-                            ):("")
+                            ):(
+                                <tr className={`${hideGetById}`}>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>
+                                        <div className="dot-spinner text-center">
+                                            <div className="dot-spinner__dot"></div>
+                                            <div className="dot-spinner__dot"></div>
+                                            <div className="dot-spinner__dot"></div>
+                                            <div className="dot-spinner__dot"></div>
+                                            <div className="dot-spinner__dot"></div>
+                                            <div className="dot-spinner__dot"></div>
+                                            <div className="dot-spinner__dot"></div>
+                                            <div className="dot-spinner__dot"></div>
+                                        </div>
+                                    </td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+
+
+                                </tr>
+                            )
                             }
 
                             {/* by name */}
                             {
-                            getByName.map(data=>{
-                                    return(
-                                        <tr key={data.id} className={`${hideGetByName} text-center`}>
-                                            <td>{data.id}</td>
-                                            <td>{data.nombre}</td>
-                                            <td>{data.cedula}</td>
-                                            <td>{data.telefono}</td>
-                                            <td>{data.colegio_Electoral}</td>
-                                            <td>{data.cordinador}</td>
-                                            <th><button className={`${hideButton} btn btn-danger shadow`}><i className='bx bx-trash'></i></button></th>
-                                            <th><button className={`${hideButton} btn btn-warning text-dark shadow`}><i className='bx bx-edit'></i></button></th>
-                                        </tr>
-                                    )
-                                })
-                            }
-
-                            {/* by cedula */}
-                            {
-                            getByCedula.map(data=>{
-                                return(
-                                    <tr key={data.id} className={`${hideGetByCedula} text-center`}>
-                                        <td>{data.id}</td>
-                                        <td>{data.nombre}</td>
-                                        <td>{data.cedula}</td>
-                                        <td>{data.telefono}</td>
-                                        <td>{data.colegio_Electoral}</td>
-                                        <td>{data.cordinador}</td>
-                                        <th><button className={`${hideButton} btn btn-danger shadow`}><i className='bx bx-trash'></i></button></th>
-                                        <th><button className={`${hideButton} btn btn-warning text-dark shadow`}><i className='bx bx-edit'></i></button></th>
-                                    </tr>
-                                )
-                            })
-                            }
-
-                            {/* by telefono */}
-                            {
-                                getByTelefono.map(data=>{
-                                    return(
-                                        <tr key={data.id} className={`${hideGetByTelefono} text-center`}>
-                                            <td>{data.id}</td>
-                                            <td>{data.nombre}</td>
-                                            <td>{data.cedula}</td>
-                                            <td>{data.telefono}</td>
-                                            <td>{data.colegio_Electoral}</td>
-                                            <td>{data.cordinador}</td>
-                                            <th><button className={`${hideButton} btn btn-danger shadow`}><i className='bx bx-trash'></i></button></th>
-                                            <th><button className={`${hideButton} btn btn-warning text-dark shadow`}><i className='bx bx-edit'></i></button></th>
-                                        </tr>
-                                    )
-                                })
-                            }
-
-
-                            {/* by Colegio Electoral */}
-                            {
-                                getByColegioElectoral.map(data=>{
-                                    return(
-                                        <tr key={data.id} className={`${hideGetByColegioElectoral} text-center`}>
-                                            <td>{data.id}</td>
-                                            <td>{data.nombre}</td>
-                                            <td>{data.cedula}</td>
-                                            <td>{data.telefono}</td>
-                                            <td>{data.colegio_Electoral}</td>
-                                            <td>{data.cordinador}</td>
-                                            <th><button className={`${hideButton} btn btn-danger shadow`}><i className='bx bx-trash'></i></button></th>
-                                            <th><button className={`${hideButton} btn btn-warning text-dark shadow`}><i className='bx bx-edit'></i></button></th>
-                                        </tr>
-                                    )
-                                })
-                            }
-
-                                  {/* by Coordinador */}
-                                {
-                                    getByCoordinador.map(data=>{
+                                loading == false ? (
+                                    getByName.map(data=>{
                                         return(
-                                            <tr key={data.id} className={`${hideGetByCoordinador} text-center`}>
+                                            <tr key={data.id} className={`${hideGetByName} text-center`}>
                                                 <td>{data.id}</td>
                                                 <td>{data.nombre}</td>
                                                 <td>{data.cedula}</td>
@@ -470,6 +406,203 @@ export const ZonaEOne = ()=>{
                                             </tr>
                                         )
                                     })
+                                ):(
+                                    <tr className={`${hideGetByName}`}>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            <div className="dot-spinner text-center">
+                                                <div className="dot-spinner__dot"></div>
+                                                <div className="dot-spinner__dot"></div>
+                                                <div className="dot-spinner__dot"></div>
+                                                <div className="dot-spinner__dot"></div>
+                                                <div className="dot-spinner__dot"></div>
+                                                <div className="dot-spinner__dot"></div>
+                                                <div className="dot-spinner__dot"></div>
+                                                <div className="dot-spinner__dot"></div>
+                                            </div>
+                                        </td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                )
+                            
+                            }
+
+                            {/* by cedula */}
+                            {
+
+                                loading == false ? (
+                                    getByCedula.map(data=>{
+                                        return(
+                                            <tr key={data.id} className={`${hideGetByCedula} text-center`}>
+                                                <td>{data.id}</td>
+                                                <td>{data.nombre}</td>
+                                                <td>{data.cedula}</td>
+                                                <td>{data.telefono}</td>
+                                                <td>{data.colegio_Electoral}</td>
+                                                <td>{data.cordinador}</td>
+                                                <th><button className={`${hideButton} btn btn-danger shadow`}><i className='bx bx-trash'></i></button></th>
+                                                <th><button className={`${hideButton} btn btn-warning text-dark shadow`}><i className='bx bx-edit'></i></button></th>
+                                            </tr>
+                                        )
+                                    })
+                                ):(
+                                    <tr className={`${hideGetByCedula}`}>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            <div className="dot-spinner text-center">
+                                                <div className="dot-spinner__dot"></div>
+                                                <div className="dot-spinner__dot"></div>
+                                                <div className="dot-spinner__dot"></div>
+                                                <div className="dot-spinner__dot"></div>
+                                                <div className="dot-spinner__dot"></div>
+                                                <div className="dot-spinner__dot"></div>
+                                                <div className="dot-spinner__dot"></div>
+                                                <div className="dot-spinner__dot"></div>
+                                            </div>
+                                        </td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                )
+                            
+                            }
+
+                            {/* by telefono */}
+                            {
+                                loading == false ? (
+                                    getByTelefono.map(data=>{
+                                        return(
+                                            <tr key={data.id} className={`${hideGetByTelefono} text-center`}>
+                                                <td>{data.id}</td>
+                                                <td>{data.nombre}</td>
+                                                <td>{data.cedula}</td>
+                                                <td>{data.telefono}</td>
+                                                <td>{data.colegio_Electoral}</td>
+                                                <td>{data.cordinador}</td>
+                                                <th><button className={`${hideButton} btn btn-danger shadow`}><i className='bx bx-trash'></i></button></th>
+                                                <th><button className={`${hideButton} btn btn-warning text-dark shadow`}><i className='bx bx-edit'></i></button></th>
+                                            </tr>
+                                        )
+                                    })
+                                ):(
+                                    <tr className={`${hideGetByTelefono}`}>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            <div className="dot-spinner text-center">
+                                                <div className="dot-spinner__dot"></div>
+                                                <div className="dot-spinner__dot"></div>
+                                                <div className="dot-spinner__dot"></div>
+                                                <div className="dot-spinner__dot"></div>
+                                                <div className="dot-spinner__dot"></div>
+                                                <div className="dot-spinner__dot"></div>
+                                                <div className="dot-spinner__dot"></div>
+                                                <div className="dot-spinner__dot"></div>
+                                            </div>
+                                        </td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                )
+                            }
+
+
+                            {/* by Colegio Electoral */}
+                            {
+                                loading == false ? (
+                                    getByColegioElectoral.map(data=>{
+                                        return(
+                                            <tr key={data.id} className={`${hideGetByColegioElectoral} text-center`}>
+                                                <td>{data.id}</td>
+                                                <td>{data.nombre}</td>
+                                                <td>{data.cedula}</td>
+                                                <td>{data.telefono}</td>
+                                                <td>{data.colegio_Electoral}</td>
+                                                <td>{data.cordinador}</td>
+                                                <th><button className={`${hideButton} btn btn-danger shadow`}><i className='bx bx-trash'></i></button></th>
+                                                <th><button className={`${hideButton} btn btn-warning text-dark shadow`}><i className='bx bx-edit'></i></button></th>
+                                            </tr>
+                                        )
+                                    })
+                                ):(
+                                    <tr className={`${hideGetByColegioElectoral}`}>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            <div className="dot-spinner text-center">
+                                                <div className="dot-spinner__dot"></div>
+                                                <div className="dot-spinner__dot"></div>
+                                                <div className="dot-spinner__dot"></div>
+                                                <div className="dot-spinner__dot"></div>
+                                                <div className="dot-spinner__dot"></div>
+                                                <div className="dot-spinner__dot"></div>
+                                                <div className="dot-spinner__dot"></div>
+                                                <div className="dot-spinner__dot"></div>
+                                            </div>
+                                        </td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                )
+                                
+                            }
+
+                                  {/* by Coordinador */}
+                                {
+                                    loading == false ? (
+                                        getByCoordinador.map(data=>{
+                                            return(
+                                                <tr key={data.id} className={`${hideGetByCoordinador} text-center`}>
+                                                    <td>{data.id}</td>
+                                                    <td>{data.nombre}</td>
+                                                    <td>{data.cedula}</td>
+                                                    <td>{data.telefono}</td>
+                                                    <td>{data.colegio_Electoral}</td>
+                                                    <td>{data.cordinador}</td>
+                                                    <th><button className={`${hideButton} btn btn-danger shadow`}><i className='bx bx-trash'></i></button></th>
+                                                    <th><button className={`${hideButton} btn btn-warning text-dark shadow`}><i className='bx bx-edit'></i></button></th>
+                                                </tr>
+                                            )
+                                        })
+                                    ):(
+                                        <tr className={`${hideGetByCoordinador}`}>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            <div className="dot-spinner text-center">
+                                                <div className="dot-spinner__dot"></div>
+                                                <div className="dot-spinner__dot"></div>
+                                                <div className="dot-spinner__dot"></div>
+                                                <div className="dot-spinner__dot"></div>
+                                                <div className="dot-spinner__dot"></div>
+                                                <div className="dot-spinner__dot"></div>
+                                                <div className="dot-spinner__dot"></div>
+                                                <div className="dot-spinner__dot"></div>
+                                            </div>
+                                        </td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    )
+                                    
                                 }
                             </tbody>
                          </table>
