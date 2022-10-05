@@ -87,14 +87,13 @@ export const ZonaEPopup = ()=>{
         setIsEmptyColegioElectoral('');
         setIsEmptyCoordinador('');
     }
-    console.log(data);
         return(
-            <div className="mt-4">
+            <div className="mt-1">
                 <div className="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel">
                     <div className="modal-dialog modal-dialog-centered">
                             <div className="modal-content">
                                     <div className="modal-header">
-                                        <h1 className="modal-title fs-5" id="exampleModalToggleLabel">Zona E</h1>
+                                        <h1 className="modal-title fs-5 text-dark" id="exampleModalToggleLabel">Zona E</h1>
                                         <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"
                                         onClick={handleClose}></button>
                                     </div>
@@ -151,8 +150,8 @@ export const ZonaEPopup = ()=>{
                     aria-labelledby="exampleModalToggleLabel2" >
                 </div>
 
-                <a className="btn btn-primary" data-bs-toggle="modal" href="#exampleModalToggle" 
-                role="button">Agregar Persona</a>
+                <a className="text-light" data-bs-toggle="modal" href="#exampleModalToggle" 
+                role="button"><i className='bx bx-folder-plus'></i></a>
                 
             </div>
         )

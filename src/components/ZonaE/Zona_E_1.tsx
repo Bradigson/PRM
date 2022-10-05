@@ -328,7 +328,7 @@ export const ZonaEOne = ()=>{
                             coordinador == '' ? <div></div>:<button onClick={getZonaEByCoordinador} className="btn-search shadow">Search</button>
                         }
                     </div>
-                    <ZonaE1Popup/>
+                    
             </div>
 
             <div className=''>
@@ -345,6 +345,9 @@ export const ZonaEOne = ()=>{
                                     <th scope="col">Cordinador</th>
                                     <th></th>
                                     <th></th>
+                                    <th>
+                                        <ZonaE1Popup/>
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -359,8 +362,9 @@ export const ZonaEOne = ()=>{
                                     <td>{getById.telefono}</td>
                                     <td>{getById.colegio_Electoral}</td>
                                     <td>{getById.coordinador}</td>
-                                    <th><button className={`${hideButton} btn btn-danger shadow`}><i className='bx bx-trash'></i></button></th>
-                                    <th><button className={`${hideButton} btn btn-warning text-dark shadow`}><i className='bx bx-edit'></i></button></th>
+                                    <td><button className={`${hideButton} btn btn-danger shadow`}><i className='bx bx-trash'></i></button></td>
+                                    <td><button className={`${hideButton} btn btn-warning text-dark shadow`}><i className='bx bx-edit'></i></button></td>
+                                    <td></td>
                                 </tr>
                             ):(
                                 <tr className={`${hideGetById}`}>
@@ -383,8 +387,6 @@ export const ZonaEOne = ()=>{
                                     <td></td>
                                     <td></td>
                                     <td></td>
-
-
                                 </tr>
                             )
                             }
@@ -403,6 +405,7 @@ export const ZonaEOne = ()=>{
                                                 <td>{data.cordinador}</td>
                                                 <th><button className={`${hideButton} btn btn-danger shadow`}><i className='bx bx-trash'></i></button></th>
                                                 <th><button className={`${hideButton} btn btn-warning text-dark shadow`}><i className='bx bx-edit'></i></button></th>
+                                                <td></td>
                                             </tr>
                                         )
                                     })
@@ -447,6 +450,7 @@ export const ZonaEOne = ()=>{
                                                 <td>{data.cordinador}</td>
                                                 <th><button className={`${hideButton} btn btn-danger shadow`}><i className='bx bx-trash'></i></button></th>
                                                 <th><button className={`${hideButton} btn btn-warning text-dark shadow`}><i className='bx bx-edit'></i></button></th>
+                                                <td></td>
                                             </tr>
                                         )
                                     })
@@ -490,6 +494,7 @@ export const ZonaEOne = ()=>{
                                                 <td>{data.cordinador}</td>
                                                 <th><button className={`${hideButton} btn btn-danger shadow`}><i className='bx bx-trash'></i></button></th>
                                                 <th><button className={`${hideButton} btn btn-warning text-dark shadow`}><i className='bx bx-edit'></i></button></th>
+                                                <td></td> 
                                             </tr>
                                         )
                                     })
@@ -533,6 +538,7 @@ export const ZonaEOne = ()=>{
                                                 <td>{data.cordinador}</td>
                                                 <th><button className={`${hideButton} btn btn-danger shadow`}><i className='bx bx-trash'></i></button></th>
                                                 <th><button className={`${hideButton} btn btn-warning text-dark shadow`}><i className='bx bx-edit'></i></button></th>
+                                                <td></td>
                                             </tr>
                                         )
                                     })
@@ -576,6 +582,7 @@ export const ZonaEOne = ()=>{
                                                     <td>{data.cordinador}</td>
                                                     <th><button className={`${hideButton} btn btn-danger shadow`}><i className='bx bx-trash'></i></button></th>
                                                     <th><button className={`${hideButton} btn btn-warning text-dark shadow`}><i className='bx bx-edit'></i></button></th>
+                                                    <td></td>
                                                 </tr>
                                             )
                                         })
