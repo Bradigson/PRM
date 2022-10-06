@@ -2,6 +2,7 @@ import React from 'react';
 import '../../assets/style/Zona_E.scss';
 import { useState, useEffect } from 'react';
 import internal from 'stream';
+import {ZonaQPopup} from '../PopUp/ZonaQCreate';
 
 interface Persona{
     id : number, 
@@ -366,6 +367,9 @@ export const ZonaQ = ()=>{
                                     <th scope="col">Cordinador</th>
                                     <th></th>
                                     <th></th>
+                                    <th>
+                                        <ZonaQPopup/>
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -380,8 +384,9 @@ export const ZonaQ = ()=>{
                                     <td>{getById.telefono}</td>
                                     <td>{getById.colegio_Electoral}</td>
                                     <td>{getById.coordinador}</td>
-                                    <th><button className={`${hideButton} btn btn-danger shadow`}><i className='bx bx-trash'></i></button></th>
-                                    <th><button className={`${hideButton} btn btn-warning text-dark shadow`}><i className='bx bx-edit'></i></button></th>
+                                    <td><button className={`${hideButton} btn btn-danger shadow`}><i className='bx bx-trash'></i></button></td>
+                                    <td><button className={`${hideButton} btn btn-warning text-dark shadow`}><i className='bx bx-edit'></i></button></td>
+                                    <td></td>
                                 </tr>
                             ):("")
                             }
@@ -399,6 +404,7 @@ export const ZonaQ = ()=>{
                                             <td>{data.cordinador}</td>
                                             <th><button className={`${hideButton} btn btn-danger shadow`}><i className='bx bx-trash'></i></button></th>
                                             <th><button className={`${hideButton} btn btn-warning text-dark shadow`}><i className='bx bx-edit'></i></button></th>
+                                            <td></td>
                                         </tr>
                                     )
                                 })
@@ -417,6 +423,7 @@ export const ZonaQ = ()=>{
                                         <td>{data.cordinador}</td>
                                         <th><button className={`${hideButton} btn btn-danger shadow`}><i className='bx bx-trash'></i></button></th>
                                         <th><button className={`${hideButton} btn btn-warning text-dark shadow`}><i className='bx bx-edit'></i></button></th>
+                                        <td></td>
                                     </tr>
                                 )
                             })
@@ -435,6 +442,7 @@ export const ZonaQ = ()=>{
                                             <td>{data.cordinador}</td>
                                             <th><button className={`${hideButton} btn btn-danger shadow`}><i className='bx bx-trash'></i></button></th>
                                             <th><button className={`${hideButton} btn btn-warning text-dark shadow`}><i className='bx bx-edit'></i></button></th>
+                                            <td></td>
                                         </tr>
                                     )
                                 })
@@ -454,6 +462,7 @@ export const ZonaQ = ()=>{
                                             <td>{data.cordinador}</td>
                                             <th><button className={`${hideButton} btn btn-danger shadow`}><i className='bx bx-trash'></i></button></th>
                                             <th><button className={`${hideButton} btn btn-warning text-dark shadow`}><i className='bx bx-edit'></i></button></th>
+                                            <td></td>
                                         </tr>
                                     )
                                 })
@@ -472,6 +481,7 @@ export const ZonaQ = ()=>{
                                                 <td>{data.cordinador}</td>
                                                 <th><button className={`${hideButton} btn btn-danger shadow`}><i className='bx bx-trash'></i></button></th>
                                                 <th><button className={`${hideButton} btn btn-warning text-dark shadow`}><i className='bx bx-edit'></i></button></th>
+                                                <td></td>
                                             </tr>
                                         )
                                     })

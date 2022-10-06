@@ -2,6 +2,7 @@ import React from 'react';
 import '../../assets/style/Zona_E.scss';
 import { useState, useEffect } from 'react';
 import internal from 'stream';
+import {ZonaQ1Popup} from '../PopUp/ZonaQ_1Create';
 
 interface Persona{
     id : number, 
@@ -367,6 +368,9 @@ export const ZonaQOne = ()=>{
                                     <th scope="col">Cordinador</th>
                                     <th></th>
                                     <th></th>
+                                    <th>
+                                        <ZonaQ1Popup/>
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -383,6 +387,7 @@ export const ZonaQOne = ()=>{
                                     <td>{getById.coordinador}</td>
                                     <th><button className={`${hideButton} btn btn-danger shadow`}><i className='bx bx-trash'></i></button></th>
                                     <th><button className={`${hideButton} btn btn-warning text-dark shadow`}><i className='bx bx-edit'></i></button></th>
+                                    <td></td>
                                 </tr>
                             ):("")
                             }
@@ -400,6 +405,7 @@ export const ZonaQOne = ()=>{
                                             <td>{data.cordinador}</td>
                                             <th><button className={`${hideButton} btn btn-danger shadow`}><i className='bx bx-trash'></i></button></th>
                                             <th><button className={`${hideButton} btn btn-warning text-dark shadow`}><i className='bx bx-edit'></i></button></th>
+                                            <td></td>
                                         </tr>
                                     )
                                 })
@@ -418,6 +424,7 @@ export const ZonaQOne = ()=>{
                                         <td>{data.cordinador}</td>
                                         <th><button className={`${hideButton} btn btn-danger shadow`}><i className='bx bx-trash'></i></button></th>
                                         <th><button className={`${hideButton} btn btn-warning text-dark shadow`}><i className='bx bx-edit'></i></button></th>
+                                        <td></td>
                                     </tr>
                                 )
                             })
@@ -436,6 +443,7 @@ export const ZonaQOne = ()=>{
                                             <td>{data.cordinador}</td>
                                             <th><button className={`${hideButton} btn btn-danger shadow`}><i className='bx bx-trash'></i></button></th>
                                             <th><button className={`${hideButton} btn btn-warning text-dark shadow`}><i className='bx bx-edit'></i></button></th>
+                                            <td></td>
                                         </tr>
                                     )
                                 })
@@ -455,6 +463,7 @@ export const ZonaQOne = ()=>{
                                             <td>{data.cordinador}</td>
                                             <th><button className={`${hideButton} btn btn-danger shadow`}><i className='bx bx-trash'></i></button></th>
                                             <th><button className={`${hideButton} btn btn-warning text-dark shadow`}><i className='bx bx-edit'></i></button></th>
+                                            <td></td>
                                         </tr>
                                     )
                                 })
@@ -473,6 +482,7 @@ export const ZonaQOne = ()=>{
                                                 <td>{data.cordinador}</td>
                                                 <th><button className={`${hideButton} btn btn-danger shadow`}><i className='bx bx-trash'></i></button></th>
                                                 <th><button className={`${hideButton} btn btn-warning text-dark shadow`}><i className='bx bx-edit'></i></button></th>
+                                                <td></td>
                                             </tr>
                                         )
                                     })
